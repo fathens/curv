@@ -121,7 +121,7 @@ fn scalar_behaves_the_same_as_bigint<E: Curve>() {
     let mut s: E::Scalar = ECScalar::zero();
 
     for _ in 0..100 {
-        let operation = rng.gen_range(0, 4);
+        let operation = rng.gen_range(0..4);
         if operation == 0 {
             let n_inv = BigInt::mod_inv(&n, q);
             let s_inv = s.invert().map(|s| s.to_bigint());
