@@ -85,7 +85,7 @@ pub struct PK(pub PublicKey);
 
 impl SK {
     fn scalar(&self) -> secp256k1::Scalar {
-        secp256k1::Scalar::from_le_bytes(self.0.secret_bytes()).unwrap()
+        secp256k1::Scalar::from_be_bytes(self.0.secret_bytes()).unwrap()
     }
 }
 
@@ -482,13 +482,14 @@ impl ECPoint for Secp256k1Point {
     }
 
     fn scalar_mul_assign(&mut self, scalar: &Self::Scalar) {
-        match (&mut self.ge, &*scalar.fe) {
+        match (&self.ge, &*scalar.fe) {
             (None, _) | (_, None) => {
                 self.ge = None;
             }
             (Some(ge), Some(fe)) => {
-                ge.0.mul_tweak(SECP256K1, &fe.scalar())
+                let nextGe = ge.mul_tweak(SECP256K1, &fe.scalar())
                     .expect("Can't fail as it's a valid secret");
+                self.ge = Some(PK(nextGe));
             }
         };
         self.purpose = "mul_assign";
