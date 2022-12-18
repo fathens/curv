@@ -7,7 +7,7 @@
 
 use std::fmt;
 
-use ff_zeroize::{PrimeField, ScalarEngine};
+use ff::{PrimeField, ScalarEngine};
 use generic_array::GenericArray;
 use pairing_plus::bls12_381::{G2Compressed, G2Uncompressed, G2};
 use pairing_plus::hash_to_curve::HashToCurve;

@@ -1,6 +1,6 @@
 use std::fmt;
 
-use ff_zeroize::{Field, PrimeField, PrimeFieldRepr, ScalarEngine};
+use ff::{Field, PrimeField, PrimeFieldRepr, ScalarEngine};
 use generic_array::GenericArray;
 use pairing_plus::bls12_381::{Fr, FrRepr};
 use rand::rngs::OsRng;

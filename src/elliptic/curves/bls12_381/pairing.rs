@@ -1,4 +1,4 @@
-use ff_zeroize::Field;
+use ff::Field;
 use pairing_plus::bls12_381::{Bls12, Fq12};
 use pairing_plus::{CurveAffine, Engine};
 
